@@ -30,7 +30,7 @@ class MockStonePaymentsPlatform
 
   @override
   Future<String?> payment({
-    required double value,
+    required int value,
     required TypeTransactionEnum typeTransaction,
     int installment = 1,
     bool? printReceipt,
@@ -40,7 +40,7 @@ class MockStonePaymentsPlatform
 
   @override
   Future<Transaction?> transaction({
-    required double value,
+    required int value,
     required TypeTransactionEnum typeTransaction,
     int installment = 1,
     bool? printReceipt,
@@ -76,7 +76,7 @@ void main() {
 
   group('StonePayments', () {
     test('payment should return status of payment', () async {
-      double value = 100.00;
+      int value = 10000;
       TypeTransactionEnum typeTransaction = TypeTransactionEnum.credit;
       int installment = 1;
       bool printReceipt = false;
@@ -95,7 +95,7 @@ void main() {
         () async {
       expect(
         () async => await StonePayments.payment(
-          value: -100.0,
+          value: -10000,
           typeTransaction: TypeTransactionEnum.credit,
           installment: 1,
           printReceipt: true,
@@ -109,7 +109,7 @@ void main() {
         () async {
       expect(
         () async => await StonePayments.payment(
-          value: 100.0,
+          value: 10000,
           typeTransaction: TypeTransactionEnum.credit,
           installment: 0,
           printReceipt: true,
@@ -123,7 +123,7 @@ void main() {
         () async {
       expect(
         () async => await StonePayments.payment(
-          value: 100.0,
+          value: 10000,
           typeTransaction: TypeTransactionEnum.credit,
           installment: 13,
           printReceipt: true,
@@ -133,7 +133,7 @@ void main() {
     });
 
     test('transaction should return the transaction object', () async {
-      double value = 100.00;
+      int value = 10000;
       TypeTransactionEnum typeTransaction = TypeTransactionEnum.credit;
       int installment = 1;
       bool printReceipt = false;
@@ -152,7 +152,7 @@ void main() {
         () async {
       expect(
         () async => await StonePayments.transaction(
-          value: -100.0,
+          value: -10000,
           typeTransaction: TypeTransactionEnum.credit,
           installment: 1,
           printReceipt: true,
@@ -166,7 +166,7 @@ void main() {
         () async {
       expect(
         () async => await StonePayments.transaction(
-          value: 100.0,
+          value: 10000,
           typeTransaction: TypeTransactionEnum.credit,
           installment: 0,
           printReceipt: true,
@@ -180,7 +180,7 @@ void main() {
         () async {
       expect(
         () async => await StonePayments.transaction(
-          value: 100.0,
+          value: 10000,
           typeTransaction: TypeTransactionEnum.credit,
           installment: 13,
           printReceipt: true,
@@ -194,7 +194,7 @@ void main() {
         () {
       expect(
         () => StonePayments.transaction(
-          value: 100.00,
+          value: 10000,
           typeTransaction: TypeTransactionEnum.debit,
           installment: 2,
         ),

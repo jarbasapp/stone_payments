@@ -34,7 +34,7 @@ abstract class StonePaymentsPlatform extends PlatformInterface {
 
   /// Payment
   Future<String?> payment({
-    required double value,
+    required int value,
     required TypeTransactionEnum typeTransaction,
     int installment = 1,
     bool? printReceipt,
@@ -44,7 +44,7 @@ abstract class StonePaymentsPlatform extends PlatformInterface {
 
   /// Transaction
   Future<Transaction?> transaction({
-    required double value,
+    required int value,
     required TypeTransactionEnum typeTransaction,
     int installment = 1,
     bool? printReceipt,

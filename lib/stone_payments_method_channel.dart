@@ -45,7 +45,7 @@ class MethodChannelStonePayments extends StonePaymentsPlatform {
 
   @override
   Future<String?> payment({
-    required double value,
+    required int value,
     required TypeTransactionEnum typeTransaction,
     int installment = 1,
     bool? printReceipt,
@@ -65,7 +65,7 @@ class MethodChannelStonePayments extends StonePaymentsPlatform {
 
   @override
   Future<Transaction?> transaction({
-    required double value,
+    required int value,
     required TypeTransactionEnum typeTransaction,
     int installment = 1,
     bool? printReceipt,

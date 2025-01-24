@@ -24,7 +24,7 @@ class StonePayments {
   /// * Uma `Future<String?>` com o status do pagamento. O valor pode ser nulo em caso de erro.
   @Deprecated('Use transaction() instead.')
   static Future<String?> payment({
-    required double value,
+    required int value,
     required TypeTransactionEnum typeTransaction,
     int installment = 1,
     bool? printReceipt,
@@ -60,7 +60,7 @@ class StonePayments {
   ///
   /// * Uma `Future<Transaction?>` com o objeto da transação. O valor pode ser nulo em caso de erro.
   static Future<Transaction?> transaction({
-    required double value,
+    required int value,
     required TypeTransactionEnum typeTransaction,
     int installment = 1,
     bool? printReceipt,
