@@ -40,7 +40,7 @@ void main() {
   test('payment', () async {
     expect(
       await platform.payment(
-        value: 10,
+        value: "1000",
         typeTransaction: TypeTransactionEnum.debit,
       ),
       '42',
@@ -49,7 +49,7 @@ void main() {
 
   test('transaction', () async {
     final transaction = await platform.transaction(
-      value: 10,
+      value: "1000",
       typeTransaction: TypeTransactionEnum.debit,
     );
     expect(transaction, isNotNull);

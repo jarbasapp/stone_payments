@@ -24,12 +24,11 @@ class StonePayments {
   /// * Uma `Future<String?>` com o status do pagamento. O valor pode ser nulo em caso de erro.
   @Deprecated('Use transaction() instead.')
   static Future<String?> payment({
-    required int value,
+    required String value,
     required TypeTransactionEnum typeTransaction,
     int installment = 1,
     bool? printReceipt,
   }) {
-    assert(value > 0, 'O valor do pagamento deve ser maior que zero.');
     assert(
       installment > 0 && installment < 13,
       'O número de parcelas deve ser maior que zero e menor que 13.',
@@ -60,13 +59,12 @@ class StonePayments {
   ///
   /// * Uma `Future<Transaction?>` com o objeto da transação. O valor pode ser nulo em caso de erro.
   static Future<Transaction?> transaction({
-    required int value,
+    required String value,
     required TypeTransactionEnum typeTransaction,
     int installment = 1,
     bool? printReceipt,
     ValueChanged<String>? onPixQrCode,
   }) {
-    assert(value > 0, 'O valor do pagamento deve ser maior que zero.');
     assert(
       installment > 0 && installment < 13,
       'O número de parcelas deve ser maior que zero e menor que 13.',

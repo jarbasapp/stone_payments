@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
                     }
                     try {
                       final result = await StonePayments.transaction(
-                        value: 5,
+                        value: "500",
                         typeTransaction: TypeTransactionEnum.pix,
                         onPixQrCode: (value) {
                           setState(() {

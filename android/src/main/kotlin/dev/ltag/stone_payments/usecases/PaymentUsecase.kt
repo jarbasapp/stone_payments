@@ -28,7 +28,7 @@ class PaymentUsecase(
     private val context = stonePayments.context
 
     fun doPayment(
-        value: Int,
+        value: String,
         type: Int,
         installment: Int,
         print: Boolean?,
@@ -44,7 +44,7 @@ class PaymentUsecase(
             transactionObject.typeOfTransaction = TypeOfTransactionEnum.values()[type]
 
             transactionObject.isCapture = true
-            transactionObject.amount = value.toString()
+            transactionObject.amount = value
 
             val provider = PosTransactionProvider(
                 context,
@@ -132,7 +132,7 @@ class PaymentUsecase(
     }
 
     fun doTransaction(
-        value: Int,
+        value: String,
         type: Int,
         installment: Int,
         print: Boolean?,
@@ -148,7 +148,7 @@ class PaymentUsecase(
             transactionObject.typeOfTransaction = TypeOfTransactionEnum.values()[type]
 
             transactionObject.isCapture = true
-            transactionObject.amount = value.toString()
+            transactionObject.amount = value
 
             val provider = PosTransactionProvider(
                 context,

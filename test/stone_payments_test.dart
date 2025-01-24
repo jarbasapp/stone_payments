@@ -30,7 +30,7 @@ class MockStonePaymentsPlatform
 
   @override
   Future<String?> payment({
-    required int value,
+    required String value,
     required TypeTransactionEnum typeTransaction,
     int installment = 1,
     bool? printReceipt,
@@ -40,7 +40,7 @@ class MockStonePaymentsPlatform
 
   @override
   Future<Transaction?> transaction({
-    required int value,
+    required String value,
     required TypeTransactionEnum typeTransaction,
     int installment = 1,
     bool? printReceipt,
@@ -76,7 +76,7 @@ void main() {
 
   group('StonePayments', () {
     test('payment should return status of payment', () async {
-      int value = 10000;
+      String value = "10000";
       TypeTransactionEnum typeTransaction = TypeTransactionEnum.credit;
       int installment = 1;
       bool printReceipt = false;
@@ -91,25 +91,12 @@ void main() {
       expect(result, isA<String>());
     });
 
-    test('payment throws assertion error when value is not greater than 0',
-        () async {
-      expect(
-        () async => await StonePayments.payment(
-          value: -10000,
-          typeTransaction: TypeTransactionEnum.credit,
-          installment: 1,
-          printReceipt: true,
-        ),
-        throwsA(isA<AssertionError>()),
-      );
-    });
-
     test(
         'payment throws assertion error when installment is not greater than 0',
         () async {
       expect(
         () async => await StonePayments.payment(
-          value: 10000,
+          value: "10000",
           typeTransaction: TypeTransactionEnum.credit,
           installment: 0,
           printReceipt: true,
@@ -123,7 +110,7 @@ void main() {
         () async {
       expect(
         () async => await StonePayments.payment(
-          value: 10000,
+          value: "10000",
           typeTransaction: TypeTransactionEnum.credit,
           installment: 13,
           printReceipt: true,
@@ -133,7 +120,7 @@ void main() {
     });
 
     test('transaction should return the transaction object', () async {
-      int value = 10000;
+      String value = "10000";
       TypeTransactionEnum typeTransaction = TypeTransactionEnum.credit;
       int installment = 1;
       bool printReceipt = false;
@@ -148,25 +135,12 @@ void main() {
       expect(result, isA<Transaction>());
     });
 
-    test('transaction throws assertion error when value is not greater than 0',
-        () async {
-      expect(
-        () async => await StonePayments.transaction(
-          value: -10000,
-          typeTransaction: TypeTransactionEnum.credit,
-          installment: 1,
-          printReceipt: true,
-        ),
-        throwsA(isA<AssertionError>()),
-      );
-    });
-
     test(
         'transaction throws assertion error when installment is not greater than 0',
         () async {
       expect(
         () async => await StonePayments.transaction(
-          value: 10000,
+          value: "10000",
           typeTransaction: TypeTransactionEnum.credit,
           installment: 0,
           printReceipt: true,
@@ -180,7 +154,7 @@ void main() {
         () async {
       expect(
         () async => await StonePayments.transaction(
-          value: 10000,
+          value: "10000",
           typeTransaction: TypeTransactionEnum.credit,
           installment: 13,
           printReceipt: true,
@@ -194,7 +168,7 @@ void main() {
         () {
       expect(
         () => StonePayments.transaction(
-          value: 10000,
+          value: "10000",
           typeTransaction: TypeTransactionEnum.debit,
           installment: 2,
         ),
