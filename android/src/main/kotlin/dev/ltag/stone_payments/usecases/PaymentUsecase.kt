@@ -105,7 +105,7 @@ class PaymentUsecase(
                         }
                         else -> {
                             val message = provider?.messageFromAuthorize
-                            sendAMessage(message ?: status.name)
+                            sendAMessage(message ?: status!!.name)
                         }
                     }
 
@@ -205,7 +205,7 @@ class PaymentUsecase(
 
                         else -> {
                             val message = provider?.messageFromAuthorize
-                            sendAMessage(message ?: status.name)
+                            sendAMessage(message ?: status!!.name)
                         }
 
                     }
