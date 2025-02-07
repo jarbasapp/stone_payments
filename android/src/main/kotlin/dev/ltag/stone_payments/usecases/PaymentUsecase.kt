@@ -261,7 +261,6 @@ class PaymentUsecase(
 
                 override fun onSuccess() {
 
-                    sendResult(selectedTransaction)
                     sendAMessage("CANCELLED")
                     if(print == true) {
                         val posPrintReceiptProvider =
