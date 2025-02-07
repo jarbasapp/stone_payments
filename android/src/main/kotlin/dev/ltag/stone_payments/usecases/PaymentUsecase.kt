@@ -56,11 +56,11 @@ class PaymentUsecase(
 
             val provider = stonePayments.providerPosTransaction
 
-            provider.setConnectionCallback(object : StoneActionCallback {
+            provider?.setConnectionCallback(object : StoneActionCallback {
 
                 override fun onSuccess() {
 
-                    when (val status = provider.transactionStatus) {
+                    when (val status = provider?.transactionStatus) {
                         TransactionStatusEnum.APPROVED -> {
 
 
@@ -94,17 +94,17 @@ class PaymentUsecase(
                             callback(Result.Success(true))
                         }
                         TransactionStatusEnum.DECLINED -> {
-                            val message = provider.messageFromAuthorize
+                            val message = provider?.messageFromAuthorize
                             sendAMessage(message ?: "DECLINED")
                             callback(Result.Success(false))
                         }
                         TransactionStatusEnum.REJECTED -> {
-                            val message = provider.messageFromAuthorize
+                            val message = provider?.messageFromAuthorize
                             sendAMessage(message ?: "REJECTED")
                             callback(Result.Success(false))
                         }
                         else -> {
-                            val message = provider.messageFromAuthorize
+                            val message = provider?.messageFromAuthorize
                             sendAMessage(message ?: status.name)
                         }
                     }
@@ -115,7 +115,7 @@ class PaymentUsecase(
 
                     Log.d("RESULT", "ERROR")
 
-                    sendAMessage(provider.transactionStatus?.name ?: "ERROR")
+                    sendAMessage(provider?.transactionStatus?.name ?: "ERROR")
 
                     callback(Result.Error(Exception("ERROR")))
                 }
@@ -125,7 +125,7 @@ class PaymentUsecase(
                 }
             })
 
-            provider.execute()
+            provider?.execute()
 
 
         } catch (e: Exception) {
@@ -161,10 +161,11 @@ class PaymentUsecase(
             )
             val provider = stonePayments.providerPosTransaction
 
-            provider.setConnectionCallback(object : StoneActionCallback {
+            provider?.setConnectionCallback(object : StoneActionCallback {
 
                 override fun onSuccess() {
-                    when (val status = provider.transactionStatus) {
+                    when (val status = provider?.transactionStatus) {
+
                         TransactionStatusEnum.APPROVED -> {
                             if (print == true) {
                                 val posPrintReceiptProvider =
@@ -193,17 +194,20 @@ class PaymentUsecase(
                             sendAMessage("APPROVED")
                         }
                         TransactionStatusEnum.DECLINED -> {
-                            val message = provider.messageFromAuthorize
+                            val message = provider?.messageFromAuthorize
                             sendAMessage(message ?: "DECLINED")
                         }
+
                         TransactionStatusEnum.REJECTED -> {
-                            val message = provider.messageFromAuthorize
+                            val message = provider?.messageFromAuthorize
                             sendAMessage(message ?: "REJECTED")
                         }
+
                         else -> {
-                            val message = provider.messageFromAuthorize
+                            val message = provider?.messageFromAuthorize
                             sendAMessage(message ?: status.name)
                         }
+
                     }
 
                     val serializableTransaction = SerializableTransactionObject.from(transactionObject)
@@ -216,7 +220,8 @@ class PaymentUsecase(
 
                     Log.d("RESULT", "ERROR")
 
-                    sendAMessage(provider.transactionStatus?.name ?: "ERROR")
+                    sendAMessage(provider?.transactionStatus?.name ?: "ERROR")
+
 
                     callback(Result.Error(Exception("ERROR")))
                 }
@@ -229,7 +234,7 @@ class PaymentUsecase(
                 }
             })
 
-            provider.execute()
+            provider?.execute()
 
 
         } catch (e: Exception) {
