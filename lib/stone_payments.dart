@@ -108,11 +108,24 @@ class StonePayments {
     );
   }
 
-  Future<String?> abortPayment() {
+  /// Aborta um pagamento.
+  ///
+  /// Retorna:
+  ///
+  /// * Uma `Future<String?>` com o status da abortação. O valor pode ser nulo em caso de erro.
+  static Future<String?> abortPayment() {
     return StonePaymentsPlatform.instance.abortPayment();
   }
 
-  Future<String?> cancel({
+  /// Cancela um pagamento.
+  ///
+  /// Parâmetros:
+  ///
+  /// * `transactionId` (required) - ID da transação.
+  /// * `printReceipt` (optional) - Opção para imprimir o comprovante (padrão é nulo).
+  ///
+  /// Retorna:
+  static Future<String?> cancel({
     required String transactionId,
     bool? printReceipt,
   }) {

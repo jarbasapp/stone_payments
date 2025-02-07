@@ -112,7 +112,6 @@ class _MyAppState extends State<MyApp> {
                           data: imgBase64,
                         ),
                       ];
-
                       await StonePayments.print(items);
                     } catch (e) {
                       setState(() {
