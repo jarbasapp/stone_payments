@@ -6,6 +6,7 @@ import android.util.Log
 import com.google.gson.Gson
 import br.com.stone.posandroid.providers.PosPrintReceiptProvider
 import br.com.stone.posandroid.providers.PosTransactionProvider
+import stone.providers.CancellationProvider;
 import dev.ltag.stone_payments.Result
 import dev.ltag.stone_payments.StonePaymentsPlugin
 import dev.ltag.stone_payments.core.Helper
