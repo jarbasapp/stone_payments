@@ -58,6 +58,19 @@ class MockStonePaymentsPlatform
   Future<String?> print(List<ItemPrintModel> items) {
     return Future.value('Printed Items');
   }
+
+  @override
+  Future<String?> abortPayment() {
+    return Future.value('Aborted Payment');
+  }
+
+  @override
+  Future<String?> cancel({
+    required String transactionId,
+    bool? printReceipt,
+  }) {
+    return Future.value('Canceled Payment');
+  }
 }
 
 void main() {

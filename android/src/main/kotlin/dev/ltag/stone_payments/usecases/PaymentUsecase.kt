@@ -20,6 +20,7 @@ import stone.application.enums.TypeOfTransactionEnum
 import stone.application.interfaces.StoneActionCallback
 import stone.application.interfaces.StoneCallbackInterface
 import stone.database.transaction.TransactionObject
+import stone.database.transaction.TransactionDAO
 import stone.utils.Stone
 
 class PaymentUsecase(
@@ -46,11 +47,13 @@ class PaymentUsecase(
             transactionObject.isCapture = true
             transactionObject.amount = value
 
-            val provider = PosTransactionProvider(
+            stonePayments.providerPosTransaction = PosTransactionProvider(
                 context,
                 transactionObject,
                 Stone.getUserModel(0),
             )
+
+            val provider = stonePayments.providerPosTransaction
 
             provider.setConnectionCallback(object : StoneActionCallback {
 
@@ -150,11 +153,12 @@ class PaymentUsecase(
             transactionObject.isCapture = true
             transactionObject.amount = value
 
-            val provider = PosTransactionProvider(
+            stonePayments.providerPosTransaction = PosTransactionProvider(
                 context,
                 transactionObject,
                 Stone.getUserModel(0),
             )
+            val provider = stonePayments.providerPosTransaction
 
             provider.setConnectionCallback(object : StoneActionCallback {
 
@@ -232,6 +236,93 @@ class PaymentUsecase(
             callback(Result.Error(e))
         }
 
+    }
+
+    fun cancel(
+        transactionId: String,
+        print: Boolean?,
+        callback: (Result<Boolean>) -> Unit,
+    ) {
+        try {
+            val transactionDAO = TransactionDAO(context)
+            val selectedTransaction = transactionDAO.findTransactionWithInitiatorTransactionKey(transactionId);
+
+            if(selectedTransaction == null) {
+                callback(Result.Error(Exception("NOT FOUND")))
+                return
+            }
+
+            val provider = CancellationProvider(
+                context,
+                selectedTransaction,
+            )
+
+            provider.setConnectionCallback(object : StoneCallbackInterface {
+
+                override fun onSuccess() {
+
+                    sendResult(selectedTransaction)
+                    sendAMessage("CANCELLED")
+                    if(print == true) {
+                        val posPrintReceiptProvider =
+                            PosPrintReceiptProvider(
+                                context, selectedTransaction,
+                                ReceiptType.MERCHANT,
+                            );
+
+                        posPrintReceiptProvider.connectionCallback = object :
+                            StoneCallbackInterface {
+
+                            override fun onSuccess() {
+
+                                Log.d("SUCCESS", selectedTransaction.toString())
+                                
+                            }
+
+                            override fun onError() {
+                                Log.d("ERRORPRINT", selectedTransaction.toString())
+
+                            }
+                        }
+
+                        posPrintReceiptProvider.execute()
+                    }
+
+                    callback(Result.Success(true))
+
+                }
+
+                override fun onError() {
+
+                    Log.d("RESULT", "ERROR")
+
+                    callback(Result.Error(Exception("ERROR")));
+                }
+            })
+
+            provider.execute()
+
+
+        } catch (e: Exception) {
+            Log.d("ERROR", e.toString())
+            callback(Result.Error(e));
+        }
+
+    }
+
+    fun abortPayment(callback: (Result<Boolean>) -> Unit) {
+        try {
+            if (stonePayments.providerPosTransaction == null) {
+                callback(Result.Success(false))
+                return
+            }
+            stonePayments.providerPosTransaction?.abortPayment()
+            callback(Result.Success(true))
+
+        } catch (e: Exception) {
+            Log.d("ERROR", e.toString())
+            callback(Result.Error(e));
+        }
     }
 
     private fun sendAMessage(message: String) {

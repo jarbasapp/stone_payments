@@ -124,6 +124,31 @@ class MethodChannelStonePayments extends StonePaymentsPlatform {
   }
 
   @override
+  Future<String?> abortPayment() async {
+    final result = await methodChannel.invokeMethod<String>(
+      'abortPayment',
+    );
+
+    return result;
+  }
+
+  @override
+  Future<String?> cancel({
+    required String transactionId,
+    bool? printReceipt,
+  }) async {
+    final result = await methodChannel.invokeMethod<String>(
+      'cancel-payment',
+      <String, dynamic>{
+        'transactionId': transactionId,
+        'printReceipt': printReceipt,
+      },
+    );
+
+    return result;
+  }
+
+  @override
   Future<String?> print(List<ItemPrintModel> items) async {
     final result = await methodChannel.invokeMethod<String>(
       'print',

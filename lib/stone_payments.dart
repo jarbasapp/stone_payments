@@ -108,6 +108,22 @@ class StonePayments {
     );
   }
 
+  Future<String?> abortPayment() {
+    return StonePaymentsPlatform.instance.abortPayment();
+  }
+
+  Future<String?> cancel({
+    required String transactionId,
+    bool? printReceipt,
+  }) {
+    assert(transactionId != "", 'A transação não pode ser vazia');
+
+    return StonePaymentsPlatform.instance.cancel(
+      transactionId: transactionId,
+      printReceipt: printReceipt,
+    );
+  }
+
   /// Imprime um arquivo a partir de uma lista de textos e imagens.
   ///
   /// Parâmetros:
