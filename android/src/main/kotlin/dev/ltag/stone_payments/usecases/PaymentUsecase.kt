@@ -241,7 +241,7 @@ class PaymentUsecase(
     fun cancel(
         transactionId: String,
         print: Boolean?,
-        callback: (Result<Boolean>) -> Unit,
+        callback: (Result<String>) -> Unit,
     ) {
         try {
             val transactionDAO = TransactionDAO(context)
@@ -288,7 +288,10 @@ class PaymentUsecase(
                         posPrintReceiptProvider.execute()
                     }
 
-                    callback(Result.Success(true))
+                    val serializableTransaction = SerializableTransactionObject.from(selectedTransaction)
+
+                    val jsonString = Gson().toJson(serializableTransaction)
+                    callback(Result.Success(jsonString))
 
                 }
 

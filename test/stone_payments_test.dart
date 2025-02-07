@@ -65,11 +65,11 @@ class MockStonePaymentsPlatform
   }
 
   @override
-  Future<String?> cancel({
+  Future<Transaction?> cancel({
     required String transactionId,
     bool? printReceipt,
   }) {
-    return Future.value('Canceled Payment');
+    return Future.value(Transaction());
   }
 }
 

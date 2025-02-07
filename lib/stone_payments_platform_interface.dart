@@ -69,7 +69,7 @@ abstract class StonePaymentsPlatform extends PlatformInterface {
   }
 
   /// Cancel Payment
-  Future<String?> cancel({
+  Future<Transaction?> cancel({
     required String transactionId,
     bool? printReceipt,
   }) {

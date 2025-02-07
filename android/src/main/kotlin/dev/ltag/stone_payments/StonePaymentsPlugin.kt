@@ -118,7 +118,9 @@ class StonePaymentsPlugin : FlutterPlugin, MethodCallHandler, Activity() {
                         call.argument("printReceipt"),
                     ) { resp ->
                         when (resp) {
-                            is Result.Success<*> -> result.success(resp.data.toString())
+                            is Result.Success<String> -> result.success(
+                                resp.data
+                            )
                             else -> result.error("Error", resp.toString(), resp.toString())
                         }
                     }

@@ -125,7 +125,7 @@ class StonePayments {
   /// * `printReceipt` (optional) - Opção para imprimir o comprovante (padrão é nulo).
   ///
   /// Retorna:
-  static Future<String?> cancel({
+  static Future<Transaction?> cancel({
     required String transactionId,
     bool? printReceipt,
   }) {

@@ -133,7 +133,7 @@ class MethodChannelStonePayments extends StonePaymentsPlatform {
   }
 
   @override
-  Future<String?> cancel({
+  Future<Transaction?> cancel({
     required String transactionId,
     bool? printReceipt,
   }) async {
@@ -145,7 +145,11 @@ class MethodChannelStonePayments extends StonePaymentsPlatform {
       },
     );
 
-    return result;
+    if (result == null) {
+      return null;
+    }
+
+    return Transaction.fromJson(result);
   }
 
   @override
