@@ -1,3 +1,8 @@
+## v1.0.1
+
+- Downgrade android minSDk to 22 (Stone requirement)
+- Updated Stone SDK version (4.11.2);
+
 ## v1.0.0
 
 - New method `cancelPayment`;

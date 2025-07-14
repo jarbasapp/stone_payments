@@ -15,7 +15,7 @@ Para usar este pacote, adicione `stone_payments` como uma dependência em seu ar
 
 ```yaml
 dependencies:
-  stone_payments: ^1.0.0
+  stone_payments: ^1.0.1
 ```
 
 Em seguida, execute `flutter pub get` para instalar o pacote.
@@ -26,10 +26,10 @@ Inclua no arquivo **local.properties**, localizado na raiz do projeto, a variáv
 packageCloudReadToken=SEU_TOKEN
 ```
 
-O minSdkVersion deve ser igual ou maior que 23
+O minSdkVersion deve ser igual ou maior que 22
 
 ```
-minSdkVersion=23
+minSdkVersion=22
 ```
 
 ##### Atenção!
