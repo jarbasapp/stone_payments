@@ -65,11 +65,12 @@ android {
 dependencies {
     implementation "br.com.stone:stone-sdk:$stone_sdk_version"
     implementation "br.com.stone:stone-sdk-posandroid:$stone_sdk_version"
-    ingenicoImplementation "br.com.stone:stone-sdk-posandroid-ingenico:$stone_sdk_version"
-    sunmiImplementation "br.com.stone:stone-sdk-posandroid-sunmi:$stone_sdk_version"
-    tectoySeriesTImplementation "br.com.stone:stone-sdk-posandroid-tectoy:$stone_sdk_version"
-    gertecGpos700Implementation "br.com.stone:stone-sdk-posandroid-gertec:$stone_sdk_version"
-    positivoSeriesLImplementation "br.com.stone:stone-sdk-posandroid-positivo:$stone_sdk_version"
+    //ingenicoImplementation "br.com.stone:stone-sdk-posandroid-ingenico:$stone_sdk_version"
+    //sunmiImplementation "br.com.stone:stone-sdk-posandroid-sunmi:$stone_sdk_version"
+    //tectoySeriesTImplementation "br.com.stone:stone-sdk-posandroid-tectoy:$stone_sdk_version"
+    //gertecGpos700Implementation "br.com.stone:stone-sdk-posandroid-gertec:$stone_sdk_version"
+    //positivoSeriesLImplementation "br.com.stone:stone-sdk-posandroid-positivo:$stone_sdk_version"
 }
+
 
 
